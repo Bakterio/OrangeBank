@@ -28,15 +28,10 @@
 
   <div>
     <%= form.label :passwd, style: "display: block" %>
-    <%= form.text_field :passwd %>
+    <%= form.password_field :passwd %>
   </div>
 
   <div>
-    <%= form.label :admin, style: "display: block" %>
-    <%= form.check_box :admin %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit "Sing up" %>
   </div>
 <% end %>

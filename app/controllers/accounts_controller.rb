@@ -23,16 +23,14 @@ class AccountsController < ApplicationController
   # POST /accounts or /accounts.json
   def create
     @account = Account.new(account_params)
+    @account.user_id = Current.user.id
 
-    respond_to do |format|
       if @account.save
-        format.html { redirect_to account_url(@account), notice: "Account was successfully created." }
-        format.json { render :show, status: :created, location: @account }
+        #redirect_to account_url(@account), notice: "Account was successfully created."
+        redirect_to root_path, notice: "Account was successfully created."
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
+        render :new, status: :unprocessable_entity 
       end
-    end
   end
 
   # PATCH/PUT /accounts/1 or /accounts/1.json
@@ -66,6 +64,6 @@ class AccountsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def account_params
-      params.require(:account).permit(:name, :curenccy, :value, :owener_id)
+      params.require(:account).permit(:name, :currency)
     end
 end

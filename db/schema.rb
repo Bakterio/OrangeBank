@@ -12,9 +12,9 @@
 
 ActiveRecord::Schema[7.0].define(version: 2022_12_19_135721) do
   create_table "accounts", force: :cascade do |t|
-    t.string "name"
-    t.string "currency"
-    t.integer "value"
+    t.string "name", null: false
+    t.string "currency", null: false
+    t.integer "value", default: 0, null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

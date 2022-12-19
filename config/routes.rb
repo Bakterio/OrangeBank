@@ -11,8 +11,9 @@ Rails.application.routes.draw do
   get "log_in", to: "session#new"
   post "log_in", to: "session#create"
 
-  namespace :accounts do 
-    get "new"
+  scope "/accounts" do 
+    get "new", to: "accounts#new", as: "accounts_new"
+    post "new", to: "accounts#create"
   end
 
   get "debug", to: "main#debug"

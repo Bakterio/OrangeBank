@@ -6,4 +6,7 @@ Rails.application.routes.draw do
 
   get "sing_up", to: "registration#new"
   post "sing_up", to: "registration#create"
+  delete "log_out", to: "session#destory"
+
+  get "debug", to: "main#debug"
 end

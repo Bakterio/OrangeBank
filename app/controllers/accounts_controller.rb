@@ -46,6 +46,10 @@ class AccountsController < ApplicationController
 
   # DELETE /accounts/1 or /accounts/1.json
   def destroy
+    unless @account.value == 0
+      redirect_to @account, alert: "You can't destroy this account, it has money on it."
+      return
+    end
     @account.destroy
 
     respond_to do |format|

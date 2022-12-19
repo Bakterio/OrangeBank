@@ -1,4 +1,5 @@
 class AccountsController < ApplicationController
+  before_action :require_user_logged_in
   before_action :set_account, only: %i[ show edit update destroy ]
 
   # GET /accounts or /accounts.json

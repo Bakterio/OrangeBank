@@ -13,12 +13,12 @@
 ActiveRecord::Schema[7.0].define(version: 2022_12_19_135721) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
-    t.string "curenccy"
+    t.string "currency"
     t.integer "value"
-    t.integer "owener_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["owener_id"], name: "index_accounts_on_owener_id"
+    t.index ["user_id"], name: "index_accounts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -31,5 +31,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_19_135721) do
     t.string "password_digest", null: false
   end
 
-  add_foreign_key "accounts", "oweners"
+  add_foreign_key "accounts", "users"
 end

@@ -1,37 +1,17 @@
-<%= form_with(model: account) do |form| %>
-  <% if account.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
-
-      <ul>
-        <% account.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
+<%= form_with model: account do |form| %>
+  <%= puts "Form: " + form.object %>
+  <%= render "shared/form_errors", form: form %>
+  <div class="mb-3">
     <%= form.label :name, style: "display: block" %>
     <%= form.text_field :name %>
   </div>
 
-  <div>
+  <div class="mb-3">
     <%= form.label :curenccy, style: "display: block" %>
     <%= form.text_field :curenccy %>
   </div>
 
-  <div>
-    <%= form.label :value, style: "display: block" %>
-    <%= form.number_field :value %>
-  </div>
-
-  <div>
-    <%= form.label :owener_id, style: "display: block" %>
-    <%= form.text_field :owener_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.submit "Create new account", class: "btn btn-primary" %>
   </div>
 <% end %>

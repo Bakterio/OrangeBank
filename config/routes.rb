@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :accounts
   root 'main#index'
 
   get 'main/about_us'
@@ -11,6 +10,10 @@ Rails.application.routes.draw do
 
   get "log_in", to: "session#new"
   post "log_in", to: "session#create"
+
+  namespace :accounts do 
+    get "new"
+  end
 
   get "debug", to: "main#debug"
 end

@@ -1,2 +1,4 @@
-<p>Logged in?: <%= Current.user  != nil %></p>
-<p>Email: <%= Current.user.email %></p>
+<p>Logged in?: <%= Current.user != nil %></p>
+<% if Current.user %>
+    <p>Email: <%= Current.user.email %></p>
+<% end %>

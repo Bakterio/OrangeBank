@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :accounts
   root 'main#index'
 
   get 'main/about_us'

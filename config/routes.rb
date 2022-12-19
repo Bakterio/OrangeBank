@@ -4,9 +4,12 @@ Rails.application.routes.draw do
   get 'main/about_us'
   get 'main/our_services'
 
-  get "sing_up", to: "registration#new"
-  post "sing_up", to: "registration#create"
+  get "sign_up", to: "registration#new"
+  post "sign_up", to: "registration#create"
   delete "log_out", to: "session#destory"
+
+  get "log_in", to: "session#new"
+  post "log_in", to: "session#create"
 
   get "debug", to: "main#debug"
 end

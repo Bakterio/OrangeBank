@@ -14,8 +14,8 @@
             Account
           </a>
           <ul class="dropdown-menu">
-            <li><%= link_to "Log in", root_path, class: "dropdown-item" %></li>
-            <li><%= link_to "Sing up", sing_up_path, class: "dropdown-item" %></li>
+            <li><%= link_to "Log in", log_in_path, class: "dropdown-item" %></li>
+            <li><%= link_to "Sing up", sign_up_path, class: "dropdown-item" %></li>
             <li><%= button_to "Log out", log_out_path, class: "dropdown-item", method: :delete %></li>
           </ul>
         </li>
@@ -23,8 +23,15 @@
     </div>
   </div>
 </nav>
+
 <% if notice %>
 <div class="alert alert-info" role="alert">
     <%= notice %>
+</div>
+<% end %>
+
+<% if alert %>
+<div class="alert alert-danger" role="alert">
+    <%= alert %>
 </div>
 <% end %>

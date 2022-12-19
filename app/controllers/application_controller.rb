@@ -1,11 +1,9 @@
 class ApplicationController < ActionController::Base
-    def current_user
-        if user_logged_in
-            User.find(session[:user_id])
-        end
-    end
+    before_action :set_current_user
 
-    def user_logged_in
-        session[:user_id] == true
+    def set_current_user
+        if session[:user_id]
+            Current.user = User.find_by(id: session[:user_id]) # doesn't throw an error
+        end
     end
 end

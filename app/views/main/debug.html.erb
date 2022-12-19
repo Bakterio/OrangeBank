@@ -1,5 +1,2 @@
-<% if @user %>
-    <%= @user.as_json %>
-<% else %>
-    Null
-<% end %>
+<p>Logged in?: <%= Current.user  != nil %></p>
+<p>Email: <%= Current.user.email %></p>

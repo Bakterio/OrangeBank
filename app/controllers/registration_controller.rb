@@ -5,11 +5,11 @@ class RegistrationController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    puts @user.email
     if @user.save
       redirect_to root_path, notice: "Successfully singed up"
     else
-      redirect_to sing_up_path, notice: "Something went wrong, please, check your input", status: 418 # teapot hehe
+      # redirect_to sing_up_path, notice: "Something went wrong, please, check your input", status: 418 # teapot hehe
+      render :new, status: 418
     end
   end
 

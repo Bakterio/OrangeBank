@@ -4,7 +4,6 @@ class AccountsController < ApplicationController
 
   # GET /accounts or /accounts.json
   def index
-    @accounts = Account.all
   end
 
   # GET /accounts/1 or /accounts/1.json
@@ -26,8 +25,7 @@ class AccountsController < ApplicationController
     @account.user_id = Current.user.id
 
       if @account.save
-        #redirect_to account_url(@account), notice: "Account was successfully created."
-        redirect_to root_path, notice: "Account was successfully created."
+        redirect_to accounts_all_path, notice: "Account was successfully created."
       else
         render :new, status: :unprocessable_entity 
       end

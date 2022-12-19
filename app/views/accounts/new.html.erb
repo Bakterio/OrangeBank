@@ -1,6 +1,6 @@
 <h1>New account</h1>
 
-<%= form_with model: @account, url: accounts_new_path do |form| %>
+<%= form_with model: @account do |form| %>
   <%= render "shared/form_errors", form: form %>
   <div class="mb-3">
     <%= form.label :name, style: "display: block" %>

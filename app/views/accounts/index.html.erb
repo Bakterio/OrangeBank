@@ -1,14 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<h1>Your accounts</h1>
+<p>You have <%= Current.user.accounts.count %> accounts.</p>
+<%= link_to "Create new account", new_account_path, class: "btn btn-primary mb-4" %>
 
-<h1>Accounts</h1>
-
-<div id="accounts">
-  <% @accounts.each do |account| %>
-    <%= render account %>
-    <p>
-      <%= link_to "Show this account", account %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New account", new_account_path %>
+<% Current.user.accounts.each do |account| %>
+    <a href=<%= account_path(account) %> class="not_a_link">
+        <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header">
+                <%= account.name %>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"><%= account.value %></h5>
+                <p class="card-text">Currency: <%= account.currency %></p>
+            </div>
+        </div>
+    </a>
+<% end %>

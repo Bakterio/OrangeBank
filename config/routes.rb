@@ -11,10 +11,7 @@ Rails.application.routes.draw do
   get "log_in", to: "session#new"
   post "log_in", to: "session#create"
 
-  scope "/accounts" do 
-    get "new", to: "accounts#new", as: "accounts_new"
-    post "new", to: "accounts#create"
-  end
+  resources :accounts
 
   get "debug", to: "main#debug"
 end

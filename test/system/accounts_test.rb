@@ -14,9 +14,9 @@ class AccountsTest < ApplicationSystemTestCase
     visit accounts_url
     click_on "New account"
 
-    fill_in "Curenccy", with: @account.curenccy
+    fill_in "currency", with: @account.currency
     fill_in "Name", with: @account.name
-    fill_in "Owener", with: @account.owener_id
+    fill_in "Owener", with: @account.user_id
     fill_in "Value", with: @account.value
     click_on "Create Account"
 
@@ -28,9 +28,9 @@ class AccountsTest < ApplicationSystemTestCase
     visit account_url(@account)
     click_on "Edit this account", match: :first
 
-    fill_in "Curenccy", with: @account.curenccy
+    fill_in "currency", with: @account.currency
     fill_in "Name", with: @account.name
-    fill_in "Owener", with: @account.owener_id
+    fill_in "Owener", with: @account.user_id
     fill_in "Value", with: @account.value
     click_on "Update Account"
 

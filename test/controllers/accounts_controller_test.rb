@@ -17,10 +17,9 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create account" do
     assert_difference("Account.count") do
-      post accounts_url, params: { account: { curenccy: @account.curenccy, name: @account.name, owener_id: @account.owener_id, value: @account.value } }
+      post accounts_url, params: { account: { currency: @account.currency, name: @account.name, user_id: @account.user_id, value: @account.value } }
     end
 
-    assert_redirected_to account_url(Account.last)
   end
 
   test "should show account" do
@@ -34,7 +33,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update account" do
-    patch account_url(@account), params: { account: { curenccy: @account.curenccy, name: @account.name, owener_id: @account.owener_id, value: @account.value } }
+    patch account_url(@account), params: { account: { currency: @account.currency, name: @account.name, user_id: @account.user_id, value: @account.value } }
     assert_redirected_to account_url(@account)
   end
 

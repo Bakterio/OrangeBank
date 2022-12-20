@@ -9,7 +9,7 @@
                 <%= account.name %>
             </div>
             <div class="card-body">
-                <h5 class="card-title"><%= account.value %> <%= account.currency_symbol %></h5>
+                <h5 class="card-title"><%= account.value.to_s %> <%= account.currency_symbol %></h5>
                 <p class="card-text">Currency: <%= account.currency %></p>
             </div>
         </div>

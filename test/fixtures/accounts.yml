@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  curenccy: MyString
-  value: 1
-  owener: one
+  name: My first account
+  currency: USD
+  value: 150
+  user: jimi
 
 two:
-  name: MyString
-  curenccy: MyString
-  value: 1
-  owener: two
+  name: My euro account
+  currency: EUR
+  value: 158
+  user: jimi

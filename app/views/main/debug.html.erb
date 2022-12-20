@@ -1,4 +1,5 @@
 <p>Logged in?: <%= Current.user != nil %></p>
 <% if Current.user %>
     <p>Email: <%= Current.user.email %></p>
+    <p>Account: <%= Current.user.accounts.first.value.to_s %>
 <% end %>

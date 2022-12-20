@@ -8,6 +8,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1 or /accounts/1.json
   def show
+    session[:a] = @account.id
   end
 
   # GET /accounts/new

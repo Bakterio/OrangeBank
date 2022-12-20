@@ -9,6 +9,10 @@ class Account < ApplicationRecord
     [["Czech crown", "CZK", "Kč"], ["Euro", "EUR", "€"], ["US dollar", "USD", "$"]]
   end
 
+  def currency_set_form
+    [["Czech crown", "CZK"], ["Euro", "EUR"], ["US dollar", "USD"]]
+  end
+
   def currency_symbol
     for cur in currency_set
       if cur[1] == self.currency

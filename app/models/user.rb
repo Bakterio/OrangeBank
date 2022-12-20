@@ -9,4 +9,12 @@ class User < ApplicationRecord
     def full_name
         self.first_name + " " + self.last_name
     end
+
+    def accounts_set
+        out = []
+        for account in self.accounts
+            out.push account.name 
+        end
+        return out
+    end
 end

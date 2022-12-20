@@ -1,5 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: %i[ show edit update destroy ]
+  before_action :set_current_account  
 
   # GET /transactions or /transactions.json
   def index
@@ -12,6 +13,12 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
+    if params[:a].nil? == true || Account.where(id: params[:a]).exists? == false
+      redirect_to accounts_path, alert: "Server error, please select your account once again"
+      return
+    end
+
+    #@account = Account.find(params[:a])
     @transaction = Transaction.new
   end
 
@@ -22,6 +29,7 @@ class TransactionsController < ApplicationController
   # POST /transactions or /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
+    @transaction.sender = Current.account
 
     respond_to do |format|
       if @transaction.save
@@ -65,6 +73,6 @@ class TransactionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.require(:transaction).permit(:note, :my_note, :variable_symbol, :amount, :sender_id, :recipient_id)
+      params.require(:transaction).permit(:note, :my_note, :variable_symbol, :amount, :recipient_id)
     end
 end

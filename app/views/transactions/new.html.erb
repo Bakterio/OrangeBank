@@ -1,9 +1,36 @@
 <h1>New transaction</h1>
 
-<%= render "form", transaction: @transaction %>
+<%= form_with model: @transaction do |form| %>
+  <%= render "shared/form_errors", form: form %>
+  
+  <div class="input-group mb-3">
+    <span class="input-group-text">Recipient account number</span>
+    <%= form.text_field :recipient_id, class: "form-control", placeholder: "123456" %>
+  </div>
 
-<br>
+  <div class="input-group mb-3">
+    <span class="input-group-text">Amount</span>
+    <%= form.text_field :amount, class: "form-control", placeholder: "123.45" %>
+    <span class="input-group-text"><%= Current.account.currency_symbol %></span>
+  </div> 
 
-<div>
-  <%= link_to "Back to transactions", transactions_path %>
-</div>
+  <div class="input-group mb-3">
+    <span class="input-group-text">Note for recipient</span>
+    <%= form.text_field :note, class: "form-control", placeholder: Current.user.full_name + " - eletrical bill" %>
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text">Note for you</span>
+    <%= form.text_field :my_note, class: "form-control", placeholder: "ČEZ Praha - eletrical bill" %>
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text">Variable symbol</span>
+    <%= form.text_field :variable_symbol, class: "form-control", placeholder: "911" %>
+  </div>
+
+  <div>
+    <%= form.submit "Send!", class: "btn btn-primary" %>
+  </div>
+
+<% end %>

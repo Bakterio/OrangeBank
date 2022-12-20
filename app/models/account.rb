@@ -1,5 +1,8 @@
 class Account < ApplicationRecord
   belongs_to :user
+  has_many :expenses, class_name: "Transaction", foreign_key: "sender_id"
+  has_many :incomes, class_name: "Transaction", foreign_key: "recipient_id"
+
   validates :name, presence: true
 
   def currency_set

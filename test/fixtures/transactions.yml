@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  note: MyString
+  my_note: MyString
+  variable_symbol: MyString
+  amount: 9.99
+  sender: one
+  recipient: one
+
+two:
+  note: MyString
+  my_note: MyString
+  variable_symbol: MyString
+  amount: 9.99
+  sender: two
+  recipient: two

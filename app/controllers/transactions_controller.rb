@@ -13,7 +13,7 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
-    if params[:a].nil? == true || Account.where(id: params[:a]).exists? == false
+    if Current.account.nil?
       redirect_to accounts_path, alert: "Server error, please select your account once again"
       return
     end
@@ -32,12 +32,14 @@ class TransactionsController < ApplicationController
     @transaction.sender = Current.account
 
     respond_to do |format|
-      if @transaction.save
-        format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully created." }
-        format.json { render :show, status: :created, location: @transaction }
+      if @transaction.valid?
+        if @transaction.sender != Current.user
+          redirect_to accounts_path, alert: "You can't send money from account which is not yours!!!"
+          return
+        end
+        format.html { redirect_to account_path(@transaction.sender), notice: "Transaction was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
     end
   end

@@ -1,4 +1,4 @@
 <%= render @account %>
 
-<%= link_to "Make a transaction", new_transaction_path(a: @account), class: "btn btn-primary mb-2" %>
+<%= link_to "Make a transaction", new_transaction_path, class: "btn btn-primary mb-2" %>
 <%= button_to "Delete account", @account, method: :delete, class: "btn btn-danger" %>

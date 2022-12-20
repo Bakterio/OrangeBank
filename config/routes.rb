@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :transactions
   root 'main#index'
 
   get 'main/about_us'
@@ -13,6 +12,9 @@ Rails.application.routes.draw do
   post "log_in", to: "session#create"
 
   resources :accounts
+
+  get "/new_transaction", to: "transactions#new"
+  post "/new_transaction", to: "transactions#create"
 
   get "debug", to: "main#debug"
 end

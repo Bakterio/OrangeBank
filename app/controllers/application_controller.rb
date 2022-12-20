@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
 
     def set_current_user
         if session[:user_id]
-            puts "at: " + Current.attributes.count.to_s
             Current.user = User.find_by(id: session[:user_id]) # doesn't throw an error
         end
     end

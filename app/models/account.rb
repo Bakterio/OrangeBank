@@ -21,4 +21,8 @@ class Account < ApplicationRecord
     end
     nil
   end
+  
+  def value_currency
+    self.value.to_s + " " + self.currency_symbol
+  end
 end

@@ -1,8 +1,8 @@
 <h1>New transaction</h1>
 
-<%= form_with model: @transaction do |form| %>
+<%= form_with model: @transaction, url: new_transaction_path do |form| %>
   <%= render "shared/form_errors", form: form %>
-  <p>From account <i><%= Current.account.name %></i> with number <i><%= Current.account.id %></i></p>
+  <p>From account <i><%= Current.account.name %></i> with number <i><%= Current.account.id %></i> with <i><%= Current.account.value_currency %></i> on it.</p>
   
   <div class="input-group mb-3">
     <span class="input-group-text">Recipient account number</span>

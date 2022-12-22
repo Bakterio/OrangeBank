@@ -3,15 +3,6 @@ class TransactionsController < ApplicationController
   before_action :require_user_logged_in
   before_action :set_current_account  
 
-  # GET /transactions or /transactions.json
-  def index
-    @transactions = Transaction.all
-  end
-
-  # GET /transactions/1 or /transactions/1.json
-  def show
-  end
-
   # GET /transactions/new
   def new
     if Current.account.nil?
@@ -21,10 +12,6 @@ class TransactionsController < ApplicationController
 
     #@account = Account.find(params[:a])
     @transaction = Transaction.new
-  end
-
-  # GET /transactions/1/edit
-  def edit
   end
 
   # POST /transactions or /transactions.json

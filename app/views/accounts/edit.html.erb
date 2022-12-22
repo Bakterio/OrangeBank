@@ -1,10 +1,13 @@
-<h1>Editing account</h1>
+<h1>Rename account number <%= @account.id %></h1>
 
-<%= render "form", account: @account %>
+<%= form_with model: @account do |form| %>
+  <%= render "shared/form_errors", form: form %>
+  <div class="mb-3">
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name, text: @account.name %>
+  </div>
 
-<br>
-
-<div>
-  <%= link_to "Show this account", @account %> |
-  <%= link_to "Back to accounts", accounts_path %>
-</div>
+  <div class="mb-3">
+    <%= form.submit "Rename account", class: "btn btn-primary" %>
+  </div>
+<% end %>

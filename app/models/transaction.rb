@@ -10,8 +10,10 @@ class Transaction < ApplicationRecord
       return false
     end
 
+    exchanged_amount = self.exchange
+
     sender.value -= self.amount
-    recipient.value += self.amount
+    recipient.value += exchanged_amount
     sender.save!
     recipient.save!
     true
@@ -23,6 +25,17 @@ class Transaction < ApplicationRecord
     end
     return self.note
   end
+
+  def exchange
+    if sender.currency == recipient.currency
+      return self.amount
+    end
+
+    amount_in_eur = self.amount / self.read_json["EUR/" + self.sender.currency.to_s].to_f
+    return amount_in_eur * self.read_json["EUR/" + self.recipient.currency.to_s].to_f
+  end
+
+  private
 
   def read_json
     file = File.open "currency_exchange.json"

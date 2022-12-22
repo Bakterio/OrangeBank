@@ -23,4 +23,9 @@ class Transaction < ApplicationRecord
     end
     return self.note
   end
+
+  def read_json
+    file = File.open "currency_exchange.json"
+    JSON.load file
+  end
 end

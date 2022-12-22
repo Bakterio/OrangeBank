@@ -39,9 +39,12 @@ class TransactionsController < ApplicationController
           return
         end
 
-        if @transaction.commit
-          @transaction.save
+        unless @transaction.commit
+          puts "err"
+          redirect_to new_transaction_path, alert: "You can't send more money than you have on your account!!!"
+          return
         end
+        @transaction.save
 
         format.html { redirect_to account_path(@transaction.sender), notice: "Transaction was successfully commited." }
       else

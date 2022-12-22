@@ -18,9 +18,9 @@ class Transaction < ApplicationRecord
   end
 
   def display_note
-    if self.my_note
-      return self.note
+    unless self.my_note == "" or nil
+      return self.my_note
     end
-    return self.my_note
+    return self.note
   end
 end

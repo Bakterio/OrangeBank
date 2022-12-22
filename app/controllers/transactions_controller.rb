@@ -27,11 +27,18 @@ class TransactionsController < ApplicationController
         end
 
         unless @transaction.commit
-          puts "err"
           redirect_to new_transaction_path, alert: "You can't send more money than you have on your account!!!"
           return
         end
+
+        if @transaction.sender.busy
+          redirect_to new_transaction_path, notice: "Too many requests!!!", status: :too_many_requests
+          return
+        end
+
+        @transaction.sender.update(busy: true)
         @transaction.save
+        @transaction.sender.update(busy: false)
 
         format.html { redirect_to account_path(@transaction.sender), notice: "Transaction was successfully commited." }
       else

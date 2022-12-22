@@ -25,4 +25,12 @@ class Account < ApplicationRecord
   def value_currency
     self.value.to_s + " " + self.currency_symbol
   end
+
+  def history
+    history = self.expenses + self.incomes
+  end
+
+  def sender?(transaction)
+    return self.id == transaction.sender.id
+  end
 end

@@ -10,4 +10,8 @@
     <strong>Value:</strong>
     <%= account.value_currency %>
   </p>
+
+  <% account.history.each do |t| %>
+    <%= t.note %>
+  <% end %>
 </div>

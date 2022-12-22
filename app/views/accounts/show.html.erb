@@ -1,4 +1,35 @@
-<%= render @account %>
+<h1>Acocunt: <%= @account.name %></h1>
+
+<p>
+  <strong>Currency:</strong>
+  <%= @account.currency %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @account.value_currency %>
+</p>
 
 <%= link_to "Make a transaction", new_transaction_path, class: "btn btn-primary mb-2" %>
-<%= button_to "Delete account", @account, method: :delete, class: "btn btn-danger" %>
+<%= button_to "Delete this account", @account, method: :delete, class: "btn btn-danger mb-4" %>
+
+<% @account.history.each do |t| %>
+  <div class="card mb-4 rounded-3 shadow-sm">
+  <div class="card-header">
+    <% if @account.sender?(t) %>
+     <span class="material-symbols-outlined">arrow_forward</span>
+    <% else %>
+      <span class="material-symbols-outlined">arrow_back</span>
+    <% end %>
+    <%=t.display_note %>
+  </div>
+  <div class="card-body">
+    <% if @account.sender?(t) %>
+      <h5 class="card-title">Sent <%= t.amount %> <%= @account.currency_symbol %> to account number <%= t.recipient.id %> owned by <%= t.recipient.user.full_name %></h5>
+    <% else %>
+      <h5 class="card-title">Recieved <%= t.amount %> <%= @account.currency_symbol %> from account number <%= t.sender.id %> owned by <%= t.recipient.user.full_name %></h5>
+    <% end %>
+    <p class="card-text">Commited <%= t.created_at.strftime('%H:%M %d.%m.%Y') %></p>
+  </div>
+</div>
+<% end %>

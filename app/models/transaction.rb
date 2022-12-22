@@ -16,4 +16,11 @@ class Transaction < ApplicationRecord
     recipient.save!
     true
   end
+
+  def display_note
+    if self.my_note
+      return self.note
+    end
+    return self.my_note
+  end
 end

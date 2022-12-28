@@ -2,12 +2,12 @@ require "application_system_test_case"
 
 class UsersTest < ApplicationSystemTestCase
   setup do
-    @user = users(:one)
+    @user = users(:jimi)
   end
 
   test "visiting the index" do
-    visit users_url
-    assert_selector "h1", text: "Users"
+    visit log_in_path
+    assert_selector "h1", text: "Log in"
   end
 
   test "should create user" do

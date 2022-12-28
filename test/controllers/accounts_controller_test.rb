@@ -2,7 +2,7 @@ require "test_helper"
 
 class AccountsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @account = accounts(:one)
+    log_in(User.first)
   end
 
   test "should get index" do

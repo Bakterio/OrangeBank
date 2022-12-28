@@ -3,20 +3,20 @@
 jimi:
   email: jimi@hendrix.com
   first_name: Jimi
-  last_name: Hendrix 
-  password_digest: test
+  last_name: Hendrix
+  password_digest: <%= BCrypt::Password.create("test") %>
   admin: false
 
 deep_purple:
   email: deep@purple.com
   first_name: Deep
-  last_name: Purple 
-  password_digest: iamdeep
+  last_name: Purple
+  password_digest: <%= BCrypt::Password.create("iamdeep") %>
   admin: false
 
 admin:
   email: admin@hq.com 
   first_name: My name is
   last_name: Admin
-  password_digest: nulll
+  password_digest: <%= BCrypt::Password.create("iamanadminhaha") %>
   admin: true

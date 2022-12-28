@@ -5,45 +5,26 @@ class UsersTest < ApplicationSystemTestCase
     @user = users(:jimi)
   end
 
-  test "visiting the index" do
+  test "should log in" do
     visit log_in_path
-    assert_selector "h1", text: "Log in"
+
+    fill_in "email", with: @user.email
+    fill_in "password", with: "test"
+
+    click_on "Log in"
+    assert_current_path root_path
   end
 
-  test "should create user" do
-    visit users_url
-    click_on "New user"
+  test "should sing up" do
+    visit sign_up_path
 
-    check "Admin" if @user.admin
-    fill_in "Email", with: @user.email
-    fill_in "First name", with: @user.first_name
-    fill_in "Last name", with: @user.last_name
-    fill_in "Passwd", with: @user.passwd
-    click_on "Create User"
+    fill_in "user_email", with: @user.email
+    fill_in "user_first_name", with: @user.first_name
+    fill_in "user_last_name", with: @user.last_name
+    fill_in "user_password", with: "test12345"
+    fill_in "user_password_confirmation", with: "test12345"
 
-    assert_text "User was successfully created"
-    click_on "Back"
-  end
-
-  test "should update User" do
-    visit user_url(@user)
-    click_on "Edit this user", match: :first
-
-    check "Admin" if @user.admin
-    fill_in "Email", with: @user.email
-    fill_in "First name", with: @user.first_name
-    fill_in "Last name", with: @user.last_name
-    fill_in "Passwd", with: @user.passwd
-    click_on "Update User"
-
-    assert_text "User was successfully updated"
-    click_on "Back"
-  end
-
-  test "should destroy User" do
-    visit user_url(@user)
-    click_on "Destroy this user", match: :first
-
-    assert_text "User was successfully destroyed"
+    click_on "Sign up"
+    assert_current_path root_path
   end
 end

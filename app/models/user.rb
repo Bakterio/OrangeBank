@@ -17,4 +17,12 @@ class User < ApplicationRecord
         end
         return out
     end
+
+    def all_accounts_value_eur
+        value = 0
+        for account in self.accounts
+            value += account.value / Transaction.read_json["EUR/" + account.currency.to_s].to_f
+        end
+        return value.round(2)
+    end
 end

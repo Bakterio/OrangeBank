@@ -1,5 +1,5 @@
 <h1>Your accounts</h1>
-<p>You have <%= Current.user.accounts.count %> accounts.</p>
+<p>You have <%= Current.user.all_accounts_value_eur %> € available on <%= Current.user.accounts.count %> accounts.</p>
 <%= link_to "Create new account", new_account_path, class: "btn btn-primary mb-4" %>
 
 <% Current.user.accounts.each do |account| %>

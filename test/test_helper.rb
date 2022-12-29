@@ -12,6 +12,6 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 
   def log_in(user)
-    post log_in_url, params: { user: { email: user.email, password: user.password_digest } }
+    session[:user_id] == user.id
   end
 end

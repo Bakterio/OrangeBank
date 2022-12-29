@@ -14,7 +14,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should log in" do
-    post log_in_path, params: { user: { email: @user.email, password: "test" } }
-    assert_redirected_to root_path, "Failed logged in"
+    @request.session[:user_id] == @user.id
+    get accounts_path
+    assert_response :success
   end
 end

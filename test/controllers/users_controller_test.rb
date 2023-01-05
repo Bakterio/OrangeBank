@@ -18,4 +18,14 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get accounts_path
     assert_response :success
   end
+
+  test "should get log in" do
+    get log_in_path
+    assert_response :success
+  end
+
+  test "should get sign up" do
+    get sign_up_path
+    assert_response :success
+  end
 end

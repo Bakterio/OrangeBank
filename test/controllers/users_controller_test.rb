@@ -10,7 +10,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       post sign_up_url, params: { user: { email: @user.email, first_name: @user.first_name, last_name: @user.last_name, password: @user.password_digest, password_confirmation: @user.password_digest} }
     end
 
-    assert_redirected_to root_url
+    assert_redirected_to root_path
+  end
+
+  test "should log out" do
+    log_in
+    delete log_out_path
+    assert_redirected_to root_path
   end
 
   test "should log in" do

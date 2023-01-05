@@ -11,3 +11,9 @@ two:
   currency: EUR
   value: 158
   user: jimi
+
+empty:
+  name: My empty account
+  currency: CZK
+  value: 0
+  user: deep_purple

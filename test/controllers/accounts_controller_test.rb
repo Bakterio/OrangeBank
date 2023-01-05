@@ -27,4 +27,17 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
     get account_url(@account)
     assert_response :success
   end
+
+  test "should delete account" do
+    assert_difference"Account.count", -1 do
+      delete account_url(accounts(:empty))
+    end
+    assert_redirected_to accounts_path
+  end
+
+  test "shouldn't delete account with money on it" do
+    assert_no_difference"Account.count" do
+      delete account_url(@account)
+    end
+  end
 end

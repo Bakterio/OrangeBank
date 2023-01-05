@@ -36,9 +36,9 @@ class TransactionsController < ApplicationController
           return
         end
 
-        @transaction.sender.update(busy: true)
+        @transaction.sender.set_busy true
         @transaction.save
-        @transaction.sender.update(busy: false)
+        @transaction.sender.set_busy false
 
         format.html { redirect_to account_path(@transaction.sender), notice: "Transaction was successfully commited." }
       else

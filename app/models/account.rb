@@ -4,6 +4,7 @@ class Account < ApplicationRecord
   has_many :incomes, class_name: "Transaction", foreign_key: "recipient_id"
 
   validates :name, presence: true
+  @busy = false
 
   def currency_set
     [["Czech crown", "CZK", "Kč"], ["Euro", "EUR", "€"], ["US dollar", "USD", "$"]]
@@ -27,10 +28,19 @@ class Account < ApplicationRecord
   end
 
   def history
-    history = self.expenses + self.incomes
+    self.expenses + self.incomes
   end
 
   def sender?(transaction)
-    return self.id == transaction.sender.id
+    self.id == transaction.sender.id
+  end
+
+  def is_busy
+    self.busy || @busy
+  end
+
+  def set_busy(value)
+    @busy = value
+    self.update(busy: value)
   end
 end

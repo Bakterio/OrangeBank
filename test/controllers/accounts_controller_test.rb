@@ -49,8 +49,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
   test "shouldn't use busy account" do
     transaction = transactions(:busy)
     get account_path(transaction.sender)
-    transaction.sender.busy = true
-    transaction.sender.save
+    transaction.sender.set_busy(true)
     post new_transaction_path, params: { transaction: { amount: transaction.amount, my_note: transaction.my_note, note: transaction.note, recipient_id: transaction.recipient_id } }
     assert_response :too_many_requests
   end

@@ -15,3 +15,11 @@ different_currency:
   amount: 9.99
   sender: one
   recipient: two
+
+busy:
+  note: MyString
+  my_note: MyString
+  variable_symbol: MyString
+  amount: 9.99
+  sender: one
+  recipient: one

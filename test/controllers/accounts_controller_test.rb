@@ -40,4 +40,18 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
       delete account_url(@account)
     end
   end
+
+  test "should raise error, need to pick account for transaction" do
+    get new_transaction_path
+    assert_redirected_to accounts_path
+  end
+
+  test "shouldn't use busy account" do
+    transaction = transactions(:busy)
+    get account_path(transaction.sender)
+    transaction.sender.busy = true
+    transaction.sender.save
+    post new_transaction_path, params: { transaction: { amount: transaction.amount, my_note: transaction.my_note, note: transaction.note, recipient_id: transaction.recipient_id } }
+    assert_response :too_many_requests
+  end
 end

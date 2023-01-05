@@ -33,5 +33,4 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to account_path(transaction.sender)
   end
-
 end

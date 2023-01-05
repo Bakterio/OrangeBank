@@ -1,6 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+same_currency:
   note: MyString
   my_note: MyString
   variable_symbol: MyString
@@ -8,10 +8,10 @@ one:
   sender: one
   recipient: one
 
-two:
+different_currency:
   note: MyString
   my_note: MyString
   variable_symbol: MyString
   amount: 9.99
-  sender: two
+  sender: one
   recipient: two

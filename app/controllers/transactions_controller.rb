@@ -18,10 +18,9 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(transaction_params)
     @transaction.sender = Current.account
-    puts @transaction.amount # only one digit
 
     respond_to do |format|
-      if @transaction.valid? || (@transaction.amount.to_s.split(".")[-1] == "0" && params[:transaction][:amount].to_s.split(".")[-1] == "00")
+      if @transaction.valid?
         unless Current.user.accounts.include? @transaction.sender
           redirect_to accounts_path, alert: "You can't send money from account which is not yours!!!"
           return

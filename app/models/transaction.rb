@@ -2,7 +2,7 @@ class Transaction < ApplicationRecord
   belongs_to :sender, class_name: "Account", foreign_key: "sender_id"
   belongs_to :recipient, class_name: "Account", foreign_key: "recipient_id"
 
-  validates :amount, presence: true, format: { with: /\d+[.]\d{2}/, message: "format is invalid" } # FIXME .00 not working
+  validates :amount, presence: true, format: { with: /\d+[.]\d{1,2}/, message: "format is invalid" }
   validates :note, presence: true
 
   def commit
@@ -26,7 +26,7 @@ class Transaction < ApplicationRecord
     return self.note
   end
 
-  def self.read_json
+  def read_json
     file = File.open "currency_exchange.json"
     JSON.load file
   end

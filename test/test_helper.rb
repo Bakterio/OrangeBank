@@ -11,7 +11,8 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 
-  def log_in(user)
-    session[:user_id] == user.id
+  def log_in
+    user = users(:jimi)
+    post log_in_path, params: {email: user.email, password: "test"}
   end
 end

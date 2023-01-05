@@ -14,7 +14,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should log in" do
-    @request.session[:user_id] == @user.id
+    log_in
     get accounts_path
     assert_response :success
   end

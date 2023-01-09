@@ -12,7 +12,7 @@ class UsersTest < ApplicationSystemTestCase
     fill_in "password", with: "test"
 
     click_on "Log in"
-    assert_current_path root_path
+    assert_current_path accounts_path
   end
 
   test "should sing up" do

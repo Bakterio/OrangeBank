@@ -2,16 +2,18 @@
 <p>You have <%= Current.user.all_accounts_value_eur %> € available on <%= Current.user.accounts.count %> accounts.</p>
 <%= link_to "Create new account", new_account_path, class: "btn btn-primary mb-4" %>
 
-<% Current.user.accounts.each do |account| %>
-    <a href=<%= account_path(account) %> class="not_a_link">
-        <div class="card mb-4 rounded-3 shadow-sm">
-            <div class="card-header">
-                <%= account.name %>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title"><%= account.value_currency %></h5>
-                <p class="card-text">Account number: <strong><%= account.id %></strong>, Currency: <%= account.currency %></p>
-            </div>
-        </div>
-    </a>
-<% end %>
+<div class="accounts_list">
+  <% Current.user.accounts.each do |account| %>
+      <a href=<%= account_path(account) %> class="not_a_link">
+          <div class="card mb-4 rounded-3 shadow-sm">
+              <div class="card-header">
+                  <%= account.name %>
+              </div>
+              <div class="card-body">
+                  <h5 class="card-title"><%= account.value_currency %></h5>
+                  <p class="card-text">Account number: <strong><%= account.id %></strong>, Currency: <%= account.currency %></p>
+              </div>
+          </div>
+      </a>
+  <% end %>
+</div>

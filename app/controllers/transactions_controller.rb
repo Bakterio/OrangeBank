@@ -31,15 +31,6 @@ class TransactionsController < ApplicationController
           return
         end
 
-        if @transaction.sender.busy
-          redirect_to new_transaction_path, notice: "Too many requests!!!", status: :too_many_requests
-          return
-        end
-
-        @transaction.sender.set_busy true
-        @transaction.save
-        @transaction.sender.set_busy false
-
         format.html { redirect_to account_path(@transaction.sender), notice: "Transaction was successfully commited." }
       else
         format.html { render :new, status: :unprocessable_entity }

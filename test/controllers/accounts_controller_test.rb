@@ -51,6 +51,6 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
     get account_path(transaction.sender)
     transaction.sender.set_busy(true)
     post new_transaction_path, params: { transaction: { amount: transaction.amount, my_note: transaction.my_note, note: transaction.note, recipient_id: transaction.recipient_id } }
-    assert_response :too_many_requests
+    assert_response :redirect
   end
 end

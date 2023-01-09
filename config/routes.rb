@@ -16,5 +16,8 @@ Rails.application.routes.draw do
   get "/new_transaction", to: "transactions#new"
   post "/new_transaction", to: "transactions#create"
 
+  get "create_donate", to: "donate#new"
+  post "create_donate", to: "donate#create"
+
   get "debug", to: "main#debug"
 end

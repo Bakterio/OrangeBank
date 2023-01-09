@@ -1,0 +1,18 @@
+<h1>Creating a new donate link</h1>
+<% if @donate_link %>
+  <p>Your generated link: <%= @donate_link %></p>
+<% end %>
+<%= form_with do |form| %>
+  <%= render "shared/form_errors", form: form %>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text">Amount</span>
+    <%= form.text_field :amount, class: "form-control", placeholder: "123.45" %>
+    <span class="input-group-text"><%= @account.currency_symbol %></span>
+  </div>
+
+  <div>
+    <%= form.submit "Create!", class: "btn btn-primary" %>
+  </div>
+
+<% end %>

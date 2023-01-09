@@ -6,7 +6,11 @@
   
   <div class="input-group mb-3">
     <span class="input-group-text">Recipient account number</span>
-    <%= form.text_field :recipient_id, class: "form-control", placeholder: "123456" %>
+    <% if @percipient == nil %>
+      <%= form.text_field :recipient_id, class: "form-control", placeholder: "123456" %>
+    <% else %>
+      <%= form.text_field :recipient_id, class: "form-control", placeholder: "123456", value: @percipient.id %>
+    <% end %>
   </div>
 
   <div class="input-group mb-3">

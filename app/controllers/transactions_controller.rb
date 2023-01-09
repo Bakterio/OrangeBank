@@ -10,8 +10,8 @@ class TransactionsController < ApplicationController
       return
     end
 
-    #@account = Account.find(params[:a])
     @transaction = Transaction.new
+    @percipient = Account.find(params[:percipient]) unless params[:percipient] == nil
   end
 
   # POST /transactions or /transactions.json

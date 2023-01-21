@@ -5,13 +5,16 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
-    if Current.account.nil? or !Account.exists?(params[:recipient])
-      redirect_to accounts_path, alert: "Server error, please select your account once again"
-      return
+    @transaction = Transaction.new(
+      recipient_id: params[:recipient],
+      note: params[:note],
+      amount: params[:amount]
+    )
+    if params[:sender] == nil
+      @transaction.sender = Current.user.accounts.first
+    else
+      @transaction.sender_id = params[:sender]
     end
-
-    @transaction = Transaction.new
-    @percipient = Account.find(params[:percipient]) unless params[:percipient] == nil
   end
 
   # POST /transactions or /transactions.json

@@ -1,4 +1,4 @@
 <h1>Creating a new donate link</h1>
 <% if @donate_link %>
-  <p><b>Your generated link:</b> <%= @donate_link %></p>
+  <p><b>Your generated link:</b> <%= link_to @donate_link, @donate_link %></p>
 <% end %>

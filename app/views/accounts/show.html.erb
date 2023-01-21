@@ -10,7 +10,7 @@
   <%= @account.value_currency %>
 </p>
 
-<%= link_to "Make a transaction", new_transaction_path, class: "btn btn-primary mb-2" %>
+<%= link_to "Make a transaction", new_transaction_path(sender: @account),  class: "btn btn-primary mb-2" %>
 <%= link_to "Create a donate link", create_donate_path(account: @account.id), class: "btn btn-primary mb-2" %>
 <%= button_to "Delete this account", @account, method: :delete, class: "btn btn-danger mb-4" %>
 

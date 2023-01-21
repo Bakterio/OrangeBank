@@ -2,20 +2,16 @@
 
 <%= form_with model: @transaction, url: new_transaction_path do |form| %>
   <%= render "shared/form_errors", form: form %>
-  <p>From account <i><%= Current.account.name %></i> with number <i><%= Current.account.id %></i> with <i><%= Current.account.value_currency %></i> on it.</p>
+  <!--<p>From account <i><%= @transaction.sender.name %></i> with number <i><%= @transaction.sender.id %></i> with <i><%= @transaction.sender.value %></i> on it.</p>-->
 
   <div class="input-group mb-3">
     <span class="input-group-text">Sender account</span>
-    <%= form.select :sender, Current.user.accounts_form_set , class: "form-select form-control" %>
+    <%= form.select :sender_id, Current.user.accounts_form_set, class: "form-select form-control" %>
   </div>
 
   <div class="input-group mb-3">
     <span class="input-group-text">Recipient account number</span>
-    <% if @percipient == nil %>
-      <%= form.text_field :recipient_id, class: "form-control", placeholder: "123456" %>
-    <% else %>
-      <%= form.text_field :recipient_id, class: "form-control", placeholder: "123456", value: @percipient.id %>
-    <% end %>
+    <%= form.text_field :recipient_id, class: "form-control", placeholder: "123456" %>
   </div>
 
   <div class="input-group mb-3">

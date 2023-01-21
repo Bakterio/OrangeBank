@@ -21,7 +21,7 @@ class User < ApplicationRecord
     def accounts_form_set
         output = []
         self.accounts.each { |account|
-            output += account.form
+            output.append(account.form)
         }
         output
     end

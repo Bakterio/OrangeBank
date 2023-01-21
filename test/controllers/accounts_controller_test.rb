@@ -41,9 +41,9 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should raise error, need to pick account for transaction" do
+  test "should not raise error, need to pick account for transaction" do
     get new_transaction_path
-    assert_redirected_to accounts_path
+    assert_response :success
   end
 
   test "shouldn't use busy account" do

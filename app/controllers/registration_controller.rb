@@ -1,16 +1,14 @@
 class RegistrationController < ApplicationController
   def new
-    @user = User.new
+    @user = Usr.new
   end
 
   def create
-    @user = User.new(user_params)
+    @user = Usr.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      UserMailer.with(user: @user).sing_up.deliver_later
       redirect_to root_path, notice: "Successfully singed up"
     else
-      # redirect_to sign_up_path, notice: "Something went wrong, please, check your input", status: 418 # teapot hehe
       flash[:alert] = "Something went wrong, please, check your input"
       render :new, status: 418
     end

@@ -5,7 +5,7 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
-    if Current.account.nil?
+    if Current.account.nil? or !Account.exists?(params[:recipient])
       redirect_to accounts_path, alert: "Server error, please select your account once again"
       return
     end

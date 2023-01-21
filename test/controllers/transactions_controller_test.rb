@@ -33,4 +33,9 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to account_path(transaction.sender)
   end
+
+  test "shouldn't do transaction with participant who doesn't exist" do
+    get new_transaction_path, params: {percipient: 0}
+    assert_response :redirect
+  end
 end

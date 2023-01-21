@@ -3,7 +3,12 @@
 <%= form_with model: @transaction, url: new_transaction_path do |form| %>
   <%= render "shared/form_errors", form: form %>
   <p>From account <i><%= Current.account.name %></i> with number <i><%= Current.account.id %></i> with <i><%= Current.account.value_currency %></i> on it.</p>
-  
+
+  <div class="input-group mb-3">
+    <span class="input-group-text">Sender account</span>
+    <%= form.select :sender, Current.user.accounts_form_set , class: "form-select form-control" %>
+  </div>
+
   <div class="input-group mb-3">
     <span class="input-group-text">Recipient account number</span>
     <% if @percipient == nil %>

@@ -18,6 +18,14 @@ class User < ApplicationRecord
         return out
     end
 
+    def accounts_form_set
+        output = []
+        self.accounts.each { |account|
+            output += account.form
+        }
+        output
+    end
+
     def all_accounts_value_eur
         value = 0
         self.accounts.each { |account|

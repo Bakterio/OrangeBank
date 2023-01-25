@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_usr!
   before_action :set_account, only: %i[ show edit update destroy ]
 
   # GET /accounts or /accounts.json

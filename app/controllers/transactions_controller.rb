@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!
+  before_action :authenticate_usr!
   before_action :set_current_account  
 
   # GET /transactions/new

@@ -14,20 +14,21 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <% if Current.user %>
-              <%= Current.user.full_name %>
-            <% else %>
+
+          <% if usr_signed_in? %>
+            <%= current_usr.email %>
+          <% else %>
               Not signed in
             <% end %>
           </a>
           <ul class="dropdown-menu">
-            <% if Current.user %>
-              <li><p class="dropdown-item"><%= Current.user.email %></p></li>
+            <% if usr_signed_in? %>
+              <li><p class="dropdown-item"><%= current_usr.email %></p></li>
               <li><%= link_to "My accounts", accounts_path, class: "dropdown-item" %></li>
-              <li><%= button_to "Log out", log_out_path, class: "dropdown-item", method: :delete %></li>
+              <li><%= button_to "Log out", destroy_usr_session_path, class: "dropdown-item", method: :delete %></li>
             <% else %>
-              <li><%= link_to "Log in", log_in_path, class: "dropdown-item" %></li>
-              <li><%= link_to "Sing up", sign_up_path, class: "dropdown-item" %></li>
+              <li><%= link_to "Log in", new_usr_session_path, class: "dropdown-item" %></li>
+              <li><%= link_to "Sing up", new_usr_registration_path, class: "dropdown-item" %></li>
             <% end %>
           </ul>
         </li>

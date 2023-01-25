@@ -16,13 +16,13 @@ class UsersTest < ApplicationSystemTestCase
   end
 
   test "should sing up" do
-    visit sign_up_path
+    visit new_usr_registration_path
 
-    fill_in "user_email", with: @user.email
-    fill_in "user_first_name", with: @user.first_name
-    fill_in "user_last_name", with: @user.last_name
-    fill_in "user_password", with: "test12345"
-    fill_in "user_password_confirmation", with: "test12345"
+    fill_in "usr_email", with: "ziggy@stardust.com"
+    fill_in "usr_first_name", with: @user.first_name
+    fill_in "usr_last_name", with: @user.last_name
+    fill_in "usr_password", with: "test12345"
+    fill_in "usr_password_confirmation", with: "test12345"
 
     click_on "Sign up"
     assert_current_path root_path

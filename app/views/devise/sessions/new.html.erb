@@ -1,0 +1,16 @@
+<h1>Log in</h1>
+
+<%= form_with url: new_usr_session_path do |form| %>
+    <%= render "shared/form_errors", form: form %>
+    <div class="mb-3">
+        <%= form.label :email %> 
+        <%= form.text_field :email, class: "form-control", placeholder: "zbynda@hamernikov.cz" %>
+    </div>
+    <div class="mb-3">
+        <%= form.label :password %> 
+        <%= form.password_field :password, class: "form-control", placeholder: "password" %>
+    </div>
+    <div class="mb-3">
+        <%= form.submit "Log in", class: "btn btn-primary" %>
+    </div>
+<% end %>

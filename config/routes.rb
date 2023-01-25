@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :usrs
-  devise_for :users
+  get "usr", to: "accounts#show"
   root 'main#index'
 
   get 'main/about_us'

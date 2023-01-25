@@ -11,7 +11,7 @@ class TransactionsController < ApplicationController
       amount: params[:amount]
     )
     if params[:sender] == nil
-      @transaction.sender = Current.user.accounts.first
+      @transaction.sender = current_usr.accounts.first
     else
       @transaction.sender_id = params[:sender]
     end
@@ -24,7 +24,7 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.valid?
-        unless Current.user.accounts.include? @transaction.sender
+        unless current_usr.accounts.include? @transaction.sender
           redirect_to accounts_path, alert: "You can't send money from account which is not yours!!!"
           return
         end

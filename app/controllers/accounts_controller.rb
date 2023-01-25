@@ -23,7 +23,7 @@ class AccountsController < ApplicationController
   # POST /accounts or /accounts.json
   def create
     @account = Account.new(account_params)
-    @account.user_id = Current.user.id
+    @account.user_id = current_usr.id
 
       if @account.save
         redirect_to accounts_path, notice: "Account was successfully created."

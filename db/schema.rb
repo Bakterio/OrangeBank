@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_21_193116) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_25_192635) do
   create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
     t.string "currency", null: false
-    t.integer "user_id", null: false
+    t.integer "usr_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "value", precision: 18, scale: 2, default: "0.0", null: false
     t.boolean "busy", default: false, null: false
-    t.index ["user_id"], name: "index_accounts_on_user_id"
+    t.index ["usr_id"], name: "index_accounts_on_usr_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -60,7 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_21_193116) do
     t.index ["reset_password_token"], name: "index_usrs_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "accounts", "users"
+  add_foreign_key "accounts", "usrs"
   add_foreign_key "transactions", "accounts", column: "recipient_id"
   add_foreign_key "transactions", "accounts", column: "sender_id"
 end

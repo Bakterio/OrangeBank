@@ -6,7 +6,7 @@
 
   <div class="input-group mb-3">
     <span class="input-group-text">Sender account</span>
-    <%= form.select :sender_id, Current.user.accounts_form_set, class: "form-select form-control" %>
+    <%= form.select :sender_id, current_usr.accounts_form_set, class: "form-select form-control" %>
   </div>
 
   <div class="input-group mb-3">
@@ -22,7 +22,7 @@
 
   <div class="input-group mb-3">
     <span class="input-group-text">Note for recipient</span>
-    <%= form.text_field :note, class: "form-control", placeholder: Current.user.full_name + " - eletrical bill" %>
+    <%= form.text_field :note, class: "form-control", placeholder: current_usr.full_name + " - eletrical bill" %>
   </div>
 
   <div class="input-group mb-3">

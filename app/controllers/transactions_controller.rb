@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: %i[ show edit update destroy ]
-  before_action :require_user_logged_in
+  before_action :authenticate_usr!
   before_action :set_current_account  
 
   # GET /transactions/new
@@ -11,7 +11,7 @@ class TransactionsController < ApplicationController
       amount: params[:amount]
     )
     if params[:sender] == nil
-      @transaction.sender = Current.user.accounts.first
+      @transaction.sender = current_usr.accounts.first
     else
       @transaction.sender_id = params[:sender]
     end
@@ -20,11 +20,10 @@ class TransactionsController < ApplicationController
   # POST /transactions or /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
-    @transaction.sender = Current.account
 
     respond_to do |format|
       if @transaction.valid?
-        unless Current.user.accounts.include? @transaction.sender
+        unless current_usr.accounts.include? @transaction.sender
           redirect_to accounts_path, alert: "You can't send money from account which is not yours!!!"
           return
         end
@@ -36,7 +35,7 @@ class TransactionsController < ApplicationController
 
         format.html { redirect_to account_path(@transaction.sender), notice: "Transaction was successfully commited." }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :bad_request }
       end
     end
   end
@@ -49,6 +48,6 @@ class TransactionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.require(:transaction).permit(:note, :my_note, :variable_symbol, :amount, :recipient_id)
+      params.require(:transaction).permit(:note, :my_note, :variable_symbol, :amount, :recipient_id, :sender_id)
     end
 end

@@ -1,7 +1,7 @@
-<p>Logged in?: <%= Current.user != nil %></p>
-<% if Current.user %>
-    <p>Email: <%= Current.user.email %></p>
-    <p>Account: <%= Current.user.accounts.first.value.to_s %>
+<p>Logged in?: <%= current_usr != nil %></p>
+<% if current_usr %>
+    <p>Email: <%= current_usr.email %></p>
+    <p>Account: <%= current_usr.accounts.first.value.to_s %>
 <% end %>
 <button class="clipboard-btn btn btn-primary" data-clipboard-text="It worked!">Click me</button>
 <!-- Example 2: with Target source -->

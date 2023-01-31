@@ -1,0 +1,20 @@
+jimi:
+  email: jimi@hendrix.com
+  first_name: Jimi
+  last_name: Hendrix
+  encrypted_password: <%= Usr.new.send(:password_digest, "test") %>
+  admin: false
+
+deep_purple:
+  email: deep@purple.com
+  first_name: Deep
+  last_name: Purple
+  encrypted_password: <%= Usr.new.send(:password_digest, "knockingatyourbackdoor") %>
+  admin: false
+
+admin:
+  email: admin@hq.com
+  first_name: My name is
+  last_name: Admin
+  encrypted_password: <%= Usr.new.send(:password_digest, "deep") %>
+  admin: true

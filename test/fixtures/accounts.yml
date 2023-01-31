@@ -4,16 +4,16 @@ one:
   name: My first account
   currency: USD
   value: 150
-  user: jimi
+  usr: jimi
 
 two:
   name: My euro account
   currency: EUR
   value: 158
-  user: jimi
+  usr: jimi
 
 empty:
   name: My empty account
   currency: CZK
   value: 0
-  user: deep_purple
+  usr: deep_purple

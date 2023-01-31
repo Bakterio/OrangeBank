@@ -1,7 +1,7 @@
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: %i[ show edit update destroy ]
+  before_action :set_transaction, only: %i[show edit update destroy]
   before_action :authenticate_usr!
-  before_action :set_current_account  
+  before_action :set_current_account
 
   # GET /transactions/new
   def new
@@ -10,7 +10,7 @@ class TransactionsController < ApplicationController
       note: params[:note],
       amount: params[:amount]
     )
-    if params[:sender] == nil
+    if params[:sender].nil?
       @transaction.sender = current_usr.accounts.first
     else
       @transaction.sender_id = params[:sender]
@@ -33,7 +33,7 @@ class TransactionsController < ApplicationController
           return
         end
 
-        format.html { redirect_to account_path(@transaction.sender), notice: "Transaction was successfully commited." }
+        format.html { redirect_to account_path(@transaction.sender), notice: 'Transaction was successfully committed.' }
       else
         format.html { render :new, status: :bad_request }
       end
@@ -41,13 +41,14 @@ class TransactionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_transaction
-      @transaction = Transaction.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def transaction_params
-      params.require(:transaction).permit(:note, :my_note, :variable_symbol, :amount, :recipient_id, :sender_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_transaction
+    @transaction = Transaction.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def transaction_params
+    params.require(:transaction).permit(:note, :my_note, :variable_symbol, :amount, :recipient_id, :sender_id)
+  end
 end

@@ -7,9 +7,9 @@ class RegistrationController < ApplicationController
     @user = Usr.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root_path, notice: "Successfully singed up"
+      redirect_to root_path, notice: 'Successfully singed up'
     else
-      flash[:alert] = "Something went wrong, please, check your input"
+      flash[:alert] = 'Something went wrong, please, check your input'
       render :new, status: 418
     end
   end

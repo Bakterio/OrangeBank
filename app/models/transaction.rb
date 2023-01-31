@@ -10,14 +10,14 @@ class Transaction < ApplicationRecord
 
   def commit
     return false if sender.value < amount
+
     transaction do
       sender.update!(value: sender.value - amount)
       recipient.update!(value: recipient.value + exchange)
-      self.save!
+      save!
     end
     true
   end
-
 
   def display_note
     return my_note unless (my_note == '') || nil

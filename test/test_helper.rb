@@ -1,6 +1,6 @@
-ENV["RAILS_ENV"] ||= "test"
-require_relative "../config/environment"
-require "rails/test_help"
+ENV['RAILS_ENV'] ||= 'test'
+require_relative '../config/environment'
+require 'rails/test_help'
 
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
@@ -13,6 +13,6 @@ class ActiveSupport::TestCase
 
   def log_in
     user = users(:jimi)
-    post log_in_path, params: {email: user.email, password: "test"}
+    post log_in_path, params: { email: user.email, password: 'test' }
   end
 end

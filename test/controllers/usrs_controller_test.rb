@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 class UsrControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
@@ -7,24 +7,34 @@ class UsrControllerTest < ActionDispatch::IntegrationTest
     @user = usrs(:deep_purple)
   end
 
-  test "should sing up" do
-    assert_difference("Usr.count") do
-      post usr_registration_path, params: { usr: { email: "david@bowie.com", first_name: @user.first_name, last_name: @user.last_name,
-                                                   password: @user.encrypted_password, password_confirmation: @user.encrypted_password} }
+  test 'should sing up' do
+    assert_difference('Usr.count') do
+      post usr_registration_path, params: { usr: { email: 'david@bowie.com', first_name: @user.first_name,
+                                                   last_name: @user.last_name, password: @user.encrypted_password,
+                                                   password_confirmation: @user.encrypted_password } }
     end
 
     assert_redirected_to accounts_path
   end
 
-  test "should sing in" do
-    post usr_session_path, params: { usr: {email: @user.email, password: "knockingatyourbackdoor" }}
+  test 'should sing in' do
+    post usr_session_path, params: { usr: { email: @user.email, password: 'knockingatyourbackdoor' } }
 
     assert_redirected_to accounts_path
   end
 
-  test "should sign out" do
+  test 'should sign out' do
     sign_in @user
     delete destroy_usr_session_path
     assert_redirected_to root_path
+  end
+
+  test 'should migrate user to usr' do
+    user = User.create(first_name: 'Karel', last_name: 'Novak', email: 'karel@novak.com', password_digest: 'test')
+    assert_difference('Usr.count') do
+      assert_difference('User.count', -1) do
+        # TODO
+      end
+    end
   end
 end

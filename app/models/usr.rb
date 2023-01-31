@@ -5,30 +5,30 @@ class Usr < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :accounts
   def full_name
-    self.first_name + " " + self.last_name
+    first_name + ' ' + last_name
   end
 
   def accounts_set
     out = []
-    self.accounts.each { |account|
+    accounts.each do |account|
       out.push account.name
-    }
-    return out
+    end
+    out
   end
 
   def accounts_form_set
     output = []
-    self.accounts.each { |account|
+    accounts.each do |account|
       output.append(account.form)
-    }
+    end
     output
   end
 
   def all_accounts_value_eur
     value = 0
-    self.accounts.each { |account|
-      value += account.value / Transaction.new.read_json["EUR/" + account.currency.to_s].to_f
-    }
-    return value.round(2)
+    accounts.each do |account|
+      value += account.value / Transaction.new.read_json['EUR/' + account.currency.to_s].to_f
+    end
+    value.round(2)
   end
 end

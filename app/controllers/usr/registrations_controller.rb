@@ -50,7 +50,7 @@ class Usr::RegistrationsController < Devise::RegistrationsController
   #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
   # end
 
-  def after_sign_up_path_for(resource)
+  def after_sign_up_path_for(_resource)
     accounts_path
   end
 

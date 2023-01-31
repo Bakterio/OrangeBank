@@ -1,4 +1,5 @@
 class DonateController < ApplicationController
+  before_action :authenticate_usr!
   def new
     account_id = params[:account]
     @amount = params[:amount]

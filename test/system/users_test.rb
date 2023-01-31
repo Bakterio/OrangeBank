@@ -2,11 +2,11 @@ require "application_system_test_case"
 
 class UsersTest < ApplicationSystemTestCase
   setup do
-    @user = users(:jimi)
+    @user = usrs(:jimi)
   end
 
   test "should log in" do
-    visit log_in_path
+    visit new_usr_session_path
 
     fill_in "email", with: @user.email
     fill_in "password", with: "test"
@@ -25,6 +25,6 @@ class UsersTest < ApplicationSystemTestCase
     fill_in "usr_password_confirmation", with: "test12345"
 
     click_on "Sign up"
-    assert_current_path root_path
+    assert_current_path accounts_path
   end
 end

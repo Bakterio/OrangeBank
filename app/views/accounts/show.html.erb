@@ -27,9 +27,9 @@
   </div>
   <div class="card-body">
     <% if @account.sender?(t) %>
-      <h5 class="card-title">Sent <%= t.amount %> <%= t.sender.currency_symbol %> to account number <%= t.recipient.id %> owned by <%= t.recipient.user.full_name %></h5>
+      <h5 class="card-title">Sent <%= t.amount %> <%= t.sender.currency_symbol %> to account number <%= t.recipient.id %> owned by <%= t.recipient.usr.full_name %></h5>
     <% else %>
-      <h5 class="card-title">Recieved <%= t.amount %> <%= t.sender.currency_symbol %> from account number <%= t.sender.id %> owned by <%= t.recipient.user.full_name %></h5>
+      <h5 class="card-title">Recieved <%= t.amount %> <%= t.sender.currency_symbol %> from account number <%= t.sender.id %> owned by <%= t.recipient.usr.full_name %></h5>
     <% end %>
     <p class="card-text"><i>Commited <%= t.created_at.strftime('%H:%M %d.%m.%Y') %> with id <%= t.id %></i></p>
   </div>

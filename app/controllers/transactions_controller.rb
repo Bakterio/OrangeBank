@@ -20,7 +20,6 @@ class TransactionsController < ApplicationController
   # POST /transactions or /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
-    @transaction.sender = Current.account
 
     respond_to do |format|
       if @transaction.valid?
@@ -36,7 +35,7 @@ class TransactionsController < ApplicationController
 
         format.html { redirect_to account_path(@transaction.sender), notice: "Transaction was successfully commited." }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :bad_request }
       end
     end
   end
@@ -49,6 +48,6 @@ class TransactionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.require(:transaction).permit(:note, :my_note, :variable_symbol, :amount, :recipient_id)
+      params.require(:transaction).permit(:note, :my_note, :variable_symbol, :amount, :recipient_id, :sender_id)
     end
 end

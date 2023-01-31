@@ -6,14 +6,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user = usrs(:jimi)
   end
 
-  test "should create usr" do
-    assert_difference("Usr.count") do
-      post sign_up_url, params: { user: { email: @user.email, first_name: @user.first_name, last_name: @user.last_name, password: @user.encrypted_password, password_confirmation: @user.encrypted_password}}
-    end
-
-    assert_redirected_to root_path
-  end
-
   test "should log out" do
     sign_in @user
     delete destroy_usr_session_path

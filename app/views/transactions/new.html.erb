@@ -4,7 +4,11 @@
   <%= render "shared/form_errors", form: form %>
   <div class="input-group mb-3">
     <span class="input-group-text">Sender account</span>
-    <%= form.select :sender_id, current_usr.accounts_form_set, class: "form-select form-control" %>
+    <% if current_usr.accounts.empty? %>
+      <input type=text class="form-control" placeholder="You need to create at least one account to make a transaction." disabled>
+    <% else %>
+      <%= form.select :sender_id, current_usr.accounts_form_set, class: "form-select form-control" %>
+    <% end %>
   </div>
 
   <div class="input-group mb-3">

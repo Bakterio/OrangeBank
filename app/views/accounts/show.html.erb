@@ -14,24 +14,44 @@
 <%= link_to "Create a donate link", create_donate_path(account: @account.id), class: "btn btn-primary mb-2" %>
 <%= button_to "Delete this account", @account, method: :delete, class: "btn btn-danger mb-4" %>
 
-<% @account.history.each do |t| %>
-  <div class="card mb-4 rounded-3 shadow-sm">
-  <div class="card-header">
-    <% if @account.sender?(t) %>
-     <span class="material-symbols-outlined">arrow_forward</span>
-      <%= t.display_note %>
-    <% else %>
-      <span class="material-symbols-outlined">arrow_back</span>
-      <%= t.note %>
+<!-- tab nav -->
+<nav>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="graphical-tab" data-bs-toggle="tab" data-bs-target="#graphical-tab-pane" type="button" role="tab" aria-controls="graphical-tab-pane" aria-selected="true">Graphical</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="table-tab" data-bs-toggle="tab" data-bs-target="#table-tab-pane" type="button" role="tab" aria-controls="table-tab-pane" aria-selected="false">Table</button>
+    </li>
+  </ul>
+</nav>
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="graphical-tab-pane" role="tabpanel" aria-labelledby="graphical-tab" tabindex="0">
+    <% @account.history.each do |t| %>
+      <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-header">
+          <% if @account.sender?(t) %>
+            <span class="material-symbols-outlined">arrow_forward</span>
+            <%= t.display_note %>
+          <% else %>
+            <span class="material-symbols-outlined">arrow_back</span>
+            <%= t.note %>
+          <% end %>
+        </div>
+        <div class="card-body">
+          <% if @account.sender?(t) %>
+            <h5 class="card-title">Sent <%= t.amount %> <%= t.sender.currency_symbol %> to account number <%= t.recipient.id %> owned by <%= t.recipient.usr.full_name %></h5>
+          <% else %>
+            <h5 class="card-title">Recieved <%= t.amount %> <%= t.sender.currency_symbol %> from account number <%= t.sender.id %> owned by <%= t.recipient.usr.full_name %></h5>
+          <% end %>
+          <p class="card-text"><i>Commited <%= t.created_at.strftime('%H:%M %d.%m.%Y') %> with id <%= t.id %></i></p>
+        </div>
+      </div>
     <% end %>
   </div>
-  <div class="card-body">
-    <% if @account.sender?(t) %>
-      <h5 class="card-title">Sent <%= t.amount %> <%= t.sender.currency_symbol %> to account number <%= t.recipient.id %> owned by <%= t.recipient.usr.full_name %></h5>
-    <% else %>
-      <h5 class="card-title">Recieved <%= t.amount %> <%= t.sender.currency_symbol %> from account number <%= t.sender.id %> owned by <%= t.recipient.usr.full_name %></h5>
-    <% end %>
-    <p class="card-text"><i>Commited <%= t.created_at.strftime('%H:%M %d.%m.%Y') %> with id <%= t.id %></i></p>
-  </div>
+
+<div class="tab-pane fade" id="table-tab-pane" role="tabpanel" aria-labelledby="table-tab" tabindex="0">
+ nic ;)
 </div>
-<% end %>
+</div>

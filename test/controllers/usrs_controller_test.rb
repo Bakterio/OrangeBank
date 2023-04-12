@@ -33,7 +33,8 @@ class UsrControllerTest < ActionDispatch::IntegrationTest
     user = User.create(first_name: 'Karel', last_name: 'Novak', email: 'karel@novak.com', password_digest: 'test')
     assert_difference('Usr.count') do
       assert_difference('User.count', -1) do
-        # TODO
+        r = post usr_session_path, params: { usr: { email: user.email, password: 'test' } }
+        # response =
       end
     end
   end

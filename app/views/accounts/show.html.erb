@@ -10,7 +10,7 @@
   <%= @account.value_currency %>
 </p>
 
-<%= link_to "Make a transaction", new_transaction_path(sender: @account),  class: "btn btn-primary mb-2" %>
+<%= link_to "Make a transaction", new_transaction_path(sender: @account), class: "btn btn-primary mb-2" %>
 <%= link_to "Create a donate link", create_donate_path(account: @account.id), class: "btn btn-primary mb-2" %>
 <%= button_to "Delete this account", @account, method: :delete, class: "btn btn-danger mb-4" %>
 
@@ -27,7 +27,7 @@
 </nav>
 
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="graphical-tab-pane" role="tabpanel" aria-labelledby="graphical-tab" tabindex="0">
+  <div class="tab-pane fade show active" id="graphical-tab-pane" role="tabpanel" aria-labelledby="graphical-tab" tabindex="0"> <!-- TODO vrátit zpět show & active !!! -->
     <% @account.history.each do |t| %>
       <div class="card mb-4 rounded-3 shadow-sm">
         <div class="card-header">
@@ -41,9 +41,11 @@
         </div>
         <div class="card-body">
           <% if @account.sender?(t) %>
-            <h5 class="card-title">Sent <%= t.amount %> <%= t.sender.currency_symbol %> to account number <%= t.recipient.id %> owned by <%= t.recipient.usr.full_name %></h5>
+            <h5 class="card-title">Sent <%= t.amount %> <%= t.sender.currency_symbol %> to account
+              number <%= t.recipient.id %> owned by <%= t.recipient.usr.full_name %></h5>
           <% else %>
-            <h5 class="card-title">Recieved <%= t.amount %> <%= t.sender.currency_symbol %> from account number <%= t.sender.id %> owned by <%= t.recipient.usr.full_name %></h5>
+            <h5 class="card-title">Recieved <%= t.amount %> <%= t.sender.currency_symbol %> from account
+              number <%= t.sender.id %> owned by <%= t.recipient.usr.full_name %></h5>
           <% end %>
           <p class="card-text"><i>Commited <%= t.created_at.strftime('%H:%M %d.%m.%Y') %> with id <%= t.id %></i></p>
         </div>
@@ -51,7 +53,48 @@
     <% end %>
   </div>
 
-<div class="tab-pane fade" id="table-tab-pane" role="tabpanel" aria-labelledby="table-tab" tabindex="0">
- nic ;)
-</div>
+  <div class="tab-pane fade" id="table-tab-pane" role="tabpanel" aria-labelledby="table-tab" tabindex="0">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Transaction Id</th>
+        <th scope="col">Sender</th>
+        <th scope="col">Recipient</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Date</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @account.history.each do |t| %>
+        <tr>
+          <td>
+            <% if @account.sender?(t) %>
+              <span class="material-symbols-outlined">arrow_forward</span>
+            <% else %>
+              <span class="material-symbols-outlined">arrow_back</span>
+            <% end %>
+          </td>
+          <td><%= t.id %></td>
+          <td>
+            <% if @account.sender?(t) %>
+              You
+            <% else %>
+              <%= t.sender.name %> <i>(<%= t.sender.id %>)</i>
+            <% end %>
+          </td>
+          <td>
+            <% if @account.recipient?(t) %>
+              You
+            <% else %>
+              <%= t.recipient.name %> <i>(<%= t.recipient.id %>)</i>
+            <% end %>
+          </td>
+          <th><%= t.amount %> <%= t.sender.currency_symbol %></th>
+          <td><%= t.created_at.strftime('%H:%M %d.%m.%Y') %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

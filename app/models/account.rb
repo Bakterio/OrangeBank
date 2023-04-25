@@ -37,6 +37,10 @@ class Account < ApplicationRecord
     id == transaction.sender.id
   end
 
+  def recipient?(transaction)
+    id == transaction.recipient.id
+  end
+
   def is_busy
     busy || @busy
   end

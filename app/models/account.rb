@@ -6,6 +6,8 @@ class Account < ApplicationRecord
   belongs_to :usr
   has_many :expenses, class_name: 'Transaction', foreign_key: 'sender_id'
   has_many :incomes, class_name: 'Transaction', foreign_key: 'recipient_id'
+  has_one_attached :donate_qr_code, dependent: :destroy
+  before_commit :generate_donate_qr_code
 
   validates :name, presence: true
   @busy = false
@@ -61,5 +63,28 @@ class Account < ApplicationRecord
   def set_busy(value)
     @busy = value
     update(busy: value)
+  end
+  def generate_donate_qr_code
+    donate_link = Rails.application.routes.url_helpers.new_transaction_path(percipient: self.id, note: 'Donate to ' + self.usr.full_name)
+    qrcode = RQRCode::QRCode.new(donate_link)
+
+    png = qrcode.as_png(
+      bit_depth: 1,
+      border_modules: 4,
+      color_mode: ChunkyPNG::COLOR_GRAYSCALE,
+      color: "black",
+      file: nil,
+      fill: "white",
+      module_px_size: 6,
+      resize_exactly_to: false,
+      resize_gte_to: false,
+      size: 120
+    )
+
+    self.donate_qr_code.attach(
+      io: StringIO.new(png.to_s),
+      filename: "qrcode.png",
+      content_type: "image/png"
+    )
   end
 end

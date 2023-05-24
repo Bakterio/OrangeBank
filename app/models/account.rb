@@ -1,10 +1,23 @@
+# frozen_string_literal: true
+
 class Account < ApplicationRecord
+  require 'csv'
+
   belongs_to :usr
   has_many :expenses, class_name: 'Transaction', foreign_key: 'sender_id'
   has_many :incomes, class_name: 'Transaction', foreign_key: 'recipient_id'
 
   validates :name, presence: true
   @busy = false
+
+  def to_csv
+    CSV.generate(col_sep: ',') do |csv|
+      csv << %w[note amount sender_id recipient_id date] # set column names
+      self.history.each do |t|
+        csv << [t.note, t.amount, t.sender.id, t.recipient.id, t.created_at.to_s]
+      end
+    end
+  end
 
   def currency_set
     [['Czech crown', 'CZK', 'Kč'], ['Euro', 'EUR', '€'], ['US dollar', 'USD', '$']]
@@ -15,18 +28,18 @@ class Account < ApplicationRecord
   end
 
   def form
-    [id.to_s + ' - ' + name, id.to_s]
+    ["#{id} - #{name}", id.to_s]
   end
 
   def currency_symbol
-    for cur in currency_set
+    currency_set.each do |cur|
       return cur[2] if cur[1] == currency
     end
     nil
   end
 
   def value_currency
-    value.to_s + ' ' + currency_symbol
+    "#{value} #{currency_symbol}"
   end
 
   def history

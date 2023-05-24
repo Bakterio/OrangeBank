@@ -3,11 +3,20 @@ class AccountsController < ApplicationController
   before_action :set_account, only: %i[show edit update destroy]
 
   # GET /accounts or /accounts.json
-  def index; end
+  def index
 
-  # GET /accounts/1 or /accounts/1.json
+  end
+
+# GET /accounts/1 or /accounts/1.json
   def show
     session[:a] = @account.id
+    respond_to do |format|
+      format.html
+      format.csv do
+        #[@account.name, '_-_', Date.today.to_s, '.csv'].join('')
+        send_data @account.to_csv, filename: 'test.csv', content_type: 'text/csv' # TODO filename not working
+      end
+    end
   end
 
   # GET /accounts/new

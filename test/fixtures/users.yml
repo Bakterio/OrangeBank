@@ -11,12 +11,19 @@ deep_purple:
   email: deep@purple.com
   first_name: Deep
   last_name: Purple
-  password_digest: <%= BCrypt::Password.create("iamdeep") %>
+  password_digest: "iamdeep"
   admin: false
 
 admin:
   email: admin@hq.com 
   first_name: My name is
   last_name: Admin
-  password_digest: <%= BCrypt::Password.create("iamanadminhaha") %>
+  password_digest: "iamanadminhaha"
   admin: true
+
+karel_novak:
+  email: karel@novak.cz
+  first_name: Karel
+  last_name: Novak
+  password_digest: "ustinadlabem"
+  admin: false

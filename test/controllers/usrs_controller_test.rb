@@ -30,12 +30,15 @@ class UsrControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should migrate user to usr' do
-    user = User.create(first_name: 'Karel', last_name: 'Novak', email: 'karel@novak.com', password_digest: 'test')
+    user = users(:karel_novak)
     assert_difference('Usr.count') do
       assert_difference('User.count', -1) do
-        r = post usr_session_path, params: { usr: { email: user.email, password: 'test' } }
-        # response =
+        post usr_session_path, params: { usr: { email: user.email, password: 'ustinadlabem' } }
       end
     end
+    assert_response 302, "HTTP response is not 302 - found"
+    usr = Usr.find_by(email: user.email)
+    assert_equal usr.first_name, user.first_name
+    assert_equal usr.last_name, user.last_name
   end
 end

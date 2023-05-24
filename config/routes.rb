@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :usrs
+  devise_for :usrs, controllers: {sessions: "usr/sessions"}
   get 'usr', to: 'accounts#redirect'
   root 'main#index'
 

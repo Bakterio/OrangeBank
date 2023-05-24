@@ -8,8 +8,8 @@ class UsersTest < ApplicationSystemTestCase
   test 'should log in' do
     visit new_usr_session_path
 
-    fill_in 'email', with: @user.email
-    fill_in 'password', with: 'test'
+    fill_in 'usr_email', with: @user.email
+    fill_in 'usr_password', with: 'test'
 
     click_on 'Log in'
     assert_current_path accounts_path
@@ -26,5 +26,15 @@ class UsersTest < ApplicationSystemTestCase
 
     click_on 'Sign up'
     assert_current_path accounts_path
+  end
+
+  test "shouldn't sign in with wrong password" do
+    visit new_usr_session_path
+
+    fill_in 'usr_email', with: @user.email
+    fill_in 'usr_password', with: 'thisisawrongpassword'
+
+    click_on 'Log in'
+    assert_current_path new_usr_session_path
   end
 end

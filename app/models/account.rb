@@ -7,7 +7,7 @@ class Account < ApplicationRecord
   has_many :expenses, class_name: 'Transaction', foreign_key: 'sender_id'
   has_many :incomes, class_name: 'Transaction', foreign_key: 'recipient_id'
   has_one_attached :donate_qr_code
-  before_commit :generate_donate_qr_code # TODO proč se to spustí vždycky když se udělá jakákoliv změna?
+  before_create :generate_donate_qr_code
 
   validates :name, presence: true
   @busy = false

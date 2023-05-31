@@ -14,7 +14,7 @@ class AccountsController < ApplicationController
       format.html
       format.csv do
         #[@account.name, '_-_', Date.today.to_s, '.csv'].join('')
-        send_data @account.to_csv, filename: 'test.csv', content_type: 'text/csv' # TODO filename not working
+        send_data @account.to_csv, filename: @account.name, content_type: 'text/csv' # TODO filename not working
       end
     end
   end

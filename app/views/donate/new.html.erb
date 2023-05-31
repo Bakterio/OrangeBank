@@ -1,5 +1,6 @@
 <h1>Creating a new donate link</h1>
 <% if @donate_link %>
   <p><b>Your generated link:</b> <%= link_to @donate_link, @donate_link %></p>
-  <%= image_tag(url_for(@account.donate_qr_code)) %>
+  <%= image_tag(url_for(@account.donate_qr_code), height: '250', width: '250') %>
+  <%= link_to "Download QR code", url_for(@account.donate_qr_code), download: true%>
 <% end %>

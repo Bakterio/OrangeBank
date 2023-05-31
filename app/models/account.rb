@@ -6,8 +6,8 @@ class Account < ApplicationRecord
   belongs_to :usr
   has_many :expenses, class_name: 'Transaction', foreign_key: 'sender_id'
   has_many :incomes, class_name: 'Transaction', foreign_key: 'recipient_id'
-  has_one_attached :donate_qr_code, dependent: :destroy
-  before_commit :generate_donate_qr_code
+  has_one_attached :donate_qr_code
+  before_commit :generate_donate_qr_code # TODO proč se to spustí vždycky když se udělá jakákoliv změna?
 
   validates :name, presence: true
   @busy = false
@@ -45,7 +45,7 @@ class Account < ApplicationRecord
   end
 
   def history
-    expenses + incomes
+    (expenses + incomes).sort_by(&:created_at).reverse
   end
 
   def sender?(transaction)
@@ -64,8 +64,13 @@ class Account < ApplicationRecord
     @busy = value
     update(busy: value)
   end
+
   def generate_donate_qr_code
-    donate_link = Rails.application.routes.url_helpers.new_transaction_path(percipient: self.id, note: 'Donate to ' + self.usr.full_name)
+    if self.donate_qr_code.nil?
+      self.donate_qr_code.purge
+    end
+    host = Rails.application.routes.url_helpers.root_url
+    donate_link = host + Rails.application.routes.url_helpers.new_transaction_url(percipient: self.id, note: 'Donate to ' + self.usr.full_name)
     qrcode = RQRCode::QRCode.new(donate_link)
 
     png = qrcode.as_png(
@@ -78,7 +83,7 @@ class Account < ApplicationRecord
       module_px_size: 6,
       resize_exactly_to: false,
       resize_gte_to: false,
-      size: 120
+      size: 250
     )
 
     self.donate_qr_code.attach(

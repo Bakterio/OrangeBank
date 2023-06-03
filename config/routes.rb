@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   post '/new_transaction', to: 'transactions#create'
 
   get 'create_donate', to: 'donate#new'
+  get 'qr_generator', to:'qr_transaction#generator'
+  post 'qr_generator', to:'qr_transaction#generate'
 
   get 'debug', to: 'main#debug'
 end

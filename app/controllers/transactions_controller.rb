@@ -6,9 +6,10 @@ class TransactionsController < ApplicationController
   # GET /transactions/new
   def new
     @transaction = Transaction.new(
-      recipient_id: params[:recipient],
+      recipient: Account.find(params[:recipient_id]),
       note: params[:note],
-      amount: params[:amount]
+      amount: params[:amount],
+      variable_symbol: params[:variable_symbol]
     )
     if params[:sender].nil?
       @transaction.sender = current_usr.accounts.first

@@ -9,7 +9,7 @@ class DonateController < ApplicationController
     end
     @account = Account.find(account_id)
 
-    if not @account.donate_qr_code.attached? or @account.donate_qr_code.nil?
+    unless @account.donate_qr_code.attached? or @account.donate_qr_code.nil?
       puts 'generating qr code'
       redirect_to accounts_path
       @account.generate_donate_qr_code

@@ -1,0 +1,61 @@
+<h1>Acocunt: <%= @account.name %></h1>
+<p id="datetime">Generated at: <%= Time.zone.now.to_datetime.strftime('%H:%M %d.%m.%Y') %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @account.id %>
+</p>
+
+<p>
+  <strong>Currency:</strong>
+  <%= @account.currency %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @account.value_currency %>
+</p>
+<div class="tab-pane fade" id="table-tab-pane" role="tabpanel" aria-labelledby="table-tab" tabindex="0">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Transaction Id</th>
+      <th scope="col">Sender</th>
+      <th scope="col">Recipient</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @account.history.each do |t| %>
+      <tr>
+        <td>
+          <% if @account.sender?(t) %>
+            →
+          <% else %>
+            ←
+          <% end %>
+        </td>
+        <td><%= t.id %></td>
+        <td>
+          <% if @account.sender?(t) %>
+            You
+          <% else %>
+            <%= t.sender.name %> <i>(<%= t.sender.id %>)</i>
+          <% end %>
+        </td>
+        <td>
+          <% if @account.recipient?(t) %>
+            You
+          <% else %>
+            <%= t.recipient.name %> <i>(<%= t.recipient.id %>)</i>
+          <% end %>
+        </td>
+        <th><%= t.amount %> <%= t.sender.currency_symbol %></th>
+        <td><%= t.created_at.strftime('%H:%M %d.%m.%Y') %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

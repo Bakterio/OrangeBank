@@ -16,6 +16,9 @@ class AccountsController < ApplicationController
         #[@account.name, '_-_', Date.today.to_s, '.csv'].join('')
         send_data @account.to_csv, filename: @account.name, content_type: 'text/csv' # TODO filename not working
       end
+      format.pdf do
+        render pdf: @account.name, template: "accounts/pdf", formats: [:html], orientation: 'Landscape', layout: 'pdf'
+      end
     end
   end
 

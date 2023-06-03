@@ -75,3 +75,6 @@ group :test do
 end
 
 gem "rqrcode", "~> 2.2"
+
+gem 'wicked_pdf'
+#gem "wkhtmltopdf-binary" - installed form aur

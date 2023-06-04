@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_24_183425) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_04_114326) do
   create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
     t.string "currency", null: false
@@ -48,6 +48,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_183425) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "transactionqrcodes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "link", null: false
   end
 
   create_table "transactions", force: :cascade do |t|

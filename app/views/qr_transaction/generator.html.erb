@@ -33,4 +33,7 @@
 
 <% end %>
 
-<p><%= @link %></p>
+<% unless @record.nil? %>
+  <p>Generated link: <%= link_to @record.link, @record.link %></p>
+  <%= image_tag(url_for(@record.qr_code), height: '250', width: '250') %>
+<% end %>

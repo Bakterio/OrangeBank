@@ -1,13 +1,13 @@
 class QrTransactionController < ApplicationController
   def generator # get
-    @record = Transactionqrcode.find(session[:qr_code_id])
+    @transaction = Transaction.new(recipient_id: params[:recipient]) unless params[:recipient].nil?
+    @record = current_usr.transactionqrcode
   end
 
   def generate # post
     link = new_transaction_url(recipient_id: params[:recipient], amount: params[:amount], note: params[:note], variable_symbol: params[:variable_symbol])
-    url = Rails.application.routes.url_helpers.root_url + link
-    record = Transactionqrcode.create!(link: link)
-    qrcode = RQRCode::QRCode.new(url)
+    record = Transactionqrcode.create(link: link, usr_id: current_usr.id)
+    qrcode = RQRCode::QRCode.new(link)
 
     png = qrcode.as_png(
       bit_depth: 1,
@@ -28,7 +28,9 @@ class QrTransactionController < ApplicationController
       content_type: "image/png"
     )
 
-    session[:qr_code_id] = record.id
+    current_usr.transactionqrcode.destroy! unless current_usr.transactionqrcode.nil?
+    record.save!
+    current_usr.transactionqrcode = record
     redirect_to qr_generator_path
   end
 end

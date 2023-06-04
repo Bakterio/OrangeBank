@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_04_114326) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_04_175030) do
   create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
     t.string "currency", null: false
@@ -54,6 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_114326) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "link", null: false
+    t.integer "usr_id", null: false
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -90,6 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_114326) do
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.boolean "admin", default: false, null: false
+    t.integer "transactionqrcode_id"
     t.index ["email"], name: "index_usrs_on_email", unique: true
     t.index ["reset_password_token"], name: "index_usrs_on_reset_password_token", unique: true
   end
@@ -99,4 +101,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_114326) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "transactions", "accounts", column: "recipient_id"
   add_foreign_key "transactions", "accounts", column: "sender_id"
+  add_foreign_key "usrs", "transactionqrcodes"
 end

@@ -3,7 +3,7 @@
 <%= form_with model: @transaction, url: qr_generator_path do |form| %>
   <%= render "shared/form_errors", form: form %>
   <div class="input-group mb-3">
-    <span class="input-group-text">Target account </span>
+    <span class="input-group-text">Target account</span>
     <% if current_usr.accounts.empty? %>
       <input type=text class="form-control" placeholder="You need to create at least one account to generate a qr code." disabled>
     <% else %>
@@ -36,4 +36,5 @@
 <% unless @record.nil? %>
   <p>Generated link: <%= link_to @record.link, @record.link %></p>
   <%= image_tag(url_for(@record.qr_code), height: '250', width: '250') %>
+  <%= link_to "Download QR code", url_for(@record.qr_code), download: true%>
 <% end %>

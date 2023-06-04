@@ -4,6 +4,8 @@ class Usr < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :accounts
+  has_one :transactionqrcode
+
   def full_name
     first_name + ' ' + last_name
   end

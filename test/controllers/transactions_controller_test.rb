@@ -7,6 +7,11 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
     @transaction = transactions(:same_currency)
   end
 
+  test 'should get transaction' do
+    get new_transaction_path sender: @transaction.sender_id
+    assert_response :success
+  end
+
   test 'should send transaction' do
     assert_difference('Transaction.count') do
       post new_transaction_path, params: { transaction: { amount: @transaction.amount, my_note: @transaction.my_note, note: @transaction.note,

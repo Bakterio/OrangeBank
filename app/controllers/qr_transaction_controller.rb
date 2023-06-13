@@ -28,7 +28,7 @@ class QrTransactionController < ApplicationController
       content_type: "image/png"
     )
 
-    current_usr.transactionqrcode.destroy! unless current_usr.transactionqrcode.nil?
+    current_usr.transactionqrcode.destroy! if current_usr.transactionqrcode.nil?
     record.save!
     current_usr.transactionqrcode = record
     redirect_to qr_generator_path

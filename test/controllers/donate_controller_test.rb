@@ -9,6 +9,6 @@ class DonateControllerTest < ActionDispatch::IntegrationTest
 
   test 'should get new' do
     get create_donate_path(account: @sender.id)
-    assert_response :success
+    assert_response :found
   end
 end

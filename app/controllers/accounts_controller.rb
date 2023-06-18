@@ -21,6 +21,9 @@ class AccountsController < ApplicationController
       format.pdf do
         render pdf: @account.name, template: "accounts/pdf", formats: [:html], orientation: 'Landscape', layout: 'pdf'
       end
+      format.json do
+        render json: @account
+      end
     end
   end
 

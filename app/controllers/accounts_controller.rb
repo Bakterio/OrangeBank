@@ -13,8 +13,10 @@ class AccountsController < ApplicationController
     respond_to do |format|
       format.html
       format.csv do
-        #[@account.name, '_-_', Date.today.to_s, '.csv'].join('')
         send_data @account.to_csv, filename: @account.name, content_type: 'text/csv' # TODO filename not working
+      end
+      format.xls do
+        send_data @account.to_xls, filename: @account.name + '.xls', content_type: 'application/vnd.ms-excel'
       end
       format.pdf do
         render pdf: @account.name, template: "accounts/pdf", formats: [:html], orientation: 'Landscape', layout: 'pdf'

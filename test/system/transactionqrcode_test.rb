@@ -7,7 +7,7 @@ class TransactionQrCodeTest < ApplicationSystemTestCase
     sign_in @user
   end
 
-  test 'should generate qr code' do
+  test 'should generate qr code' do # TODO delete?
     visit qr_generator_path
   end
 end

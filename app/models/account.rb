@@ -21,6 +21,15 @@ class Account < ApplicationRecord
     end
   end
 
+  def to_xls
+    CSV.generate(col_sep: '\t') do |csv|
+      csv << %w[note amount sender_id recipient_id date]
+      self.history.each do |t|
+        csv << [t.note, t.amount, t.sender.id, t.recipient.id, t.created_at.to_s]
+      end
+    end
+  end
+
   def currency_set
     [['Czech crown', 'CZK', 'Kč'], ['Euro', 'EUR', '€'], ['US dollar', 'USD', '$']]
   end

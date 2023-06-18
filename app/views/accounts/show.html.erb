@@ -21,6 +21,7 @@
   </button>
   <ul class="dropdown-menu">
     <li><%= link_to "Export as CSV", account_path(@account, format: :csv), class: "dropdown-item" %></li>
+    <li><%= link_to "Export as XLS", account_path(@account, format: :xls), class: "dropdown-item" %></li>
     <li><%= link_to "Export as PDF", account_path(@account, format: :pdf), class: "dropdown-item", target: "_blank"%></li>
   </ul>
 </div>

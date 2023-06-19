@@ -1,8 +1,10 @@
-testovací appka na devise
-přapokat tohle na devise + migrace starých účtů (hashování hesel)
-button na json, csv, xlsx, pdf (převádění)
 api na výpisy s tokenem jwt
-donate button
 i18n jazyky
 
+
+Hotovo:
+testovací appka na devise
+přapokat tohle na devise + migrace starých účtů (hashování hesel)
+donate button
 rubymine rubocop
+button na json, csv, xlsx, pdf (převádění)

@@ -26,11 +26,12 @@ class Usr < ApplicationRecord
     output
   end
 
-  def all_accounts_value_eur
+  def all_accounts_value(currency)
     value = 0
     accounts.each do |account|
-      value += account.value / Transaction.new.read_json['EUR/' + account.currency.to_s].to_f
+      value += account.value / Transaction.new.read_json["EUR" + '/' + account.currency.to_s].to_f # now I have value in €
     end
-    value.round(2)
+
+    (value * Transaction.new.read_json["EUR" + '/' + currency.upcase]).round(2)
   end
 end

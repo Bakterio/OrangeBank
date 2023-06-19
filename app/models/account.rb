@@ -30,7 +30,7 @@ class Account < ApplicationRecord
     end
   end
 
-  def currency_set
+  def self.currency_set
     [['Czech crown', 'CZK', 'Kč'], ['Euro', 'EUR', '€'], ['US dollar', 'USD', '$']]
   end
 
@@ -43,8 +43,15 @@ class Account < ApplicationRecord
   end
 
   def currency_symbol
-    currency_set.each do |cur|
+    self.class.currency_set.each do |cur|
       return cur[2] if cur[1] == currency
+    end
+    nil
+  end
+
+  def self.currency_symbol_from_code(code)
+    currency_set.each do |cur|
+      return cur[2] if cur[1] == code.upcase
     end
     nil
   end

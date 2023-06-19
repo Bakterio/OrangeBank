@@ -1,5 +1,5 @@
 <h1>Your accounts</h1>
-<p>You have <%= current_usr.all_accounts_value_eur %> € available on <%= current_usr.accounts.count %> accounts.</p>
+<p>You have <%= value_in_all_currencies @account %> available on <%= current_usr.accounts.count %> accounts.</p>
 <%= link_to "Create new account", new_account_path, class: "btn btn-primary mb-4" %>
 
 <div class="accounts_list">

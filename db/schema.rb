@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_04_175030) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_24_183425) do
   create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
     t.string "currency", null: false
@@ -50,13 +50,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_175030) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "transactionqrcodes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "link", null: false
-    t.integer "usr_id", null: false
-  end
-
   create_table "transactions", force: :cascade do |t|
     t.string "note", null: false
     t.string "my_note"
@@ -91,7 +84,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_175030) do
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.boolean "admin", default: false, null: false
-    t.integer "transactionqrcode_id"
     t.index ["email"], name: "index_usrs_on_email", unique: true
     t.index ["reset_password_token"], name: "index_usrs_on_reset_password_token", unique: true
   end
@@ -101,5 +93,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_175030) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "transactions", "accounts", column: "recipient_id"
   add_foreign_key "transactions", "accounts", column: "sender_id"
-  add_foreign_key "usrs", "transactionqrcodes"
 end

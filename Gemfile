@@ -79,3 +79,6 @@ gem "rqrcode", "~> 2.2"
 gem 'wicked_pdf'
 #gem "wkhtmltopdf-binary" - installed form aur
 gem 'active_model_serializers', '~> 0.10.13'
+gem 'caxlsx'
+gem 'caxlsx_rails'
+gem 'simplecov'

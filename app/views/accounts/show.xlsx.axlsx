@@ -1,0 +1,13 @@
+wb = xlsx_package.workbook
+income = s.add_style num_fmt: 5
+expense = s.add_style num_fmt: 8
+
+wb.add_worksheet(name: "Transactions") do |sheet|
+  sheet.add_row %w"Note Amount Sender Recipient Date"
+  @account.history.each do |t|
+    sheet.add_row [t.note, t.amount, t.sender_id, t.recipient_id, t.created_at.to_datetime.strftime('%H:%M %d.%m.%Y')], style: [, income] if t.recipient_id == @account.id
+    sheet.add_row [t.note, t.amount, t.sender_id, t.recipient_id, t.created_at.to_datetime.strftime('%H:%M %d.%m.%Y')], style: [, expnese]
+  end
+
+  sheet.add_row ["Current balance:", @account.value]
+end

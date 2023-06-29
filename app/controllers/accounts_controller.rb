@@ -10,13 +10,14 @@ class AccountsController < ApplicationController
 # GET /accounts/1 or /accounts/1.json
   def show
     session[:a] = @account.id
+    file_name = @account.name + "-" + Time.zone.now.to_datetime.strftime('%d.%m.%Y')
     respond_to do |format|
       format.html
       format.csv do
         send_data @account.to_csv, filename: @account.name, content_type: 'text/csv' # TODO filename not working
       end
-      format.xls do
-        send_data @account.to_xls, filename: @account.name + '.xls', content_type: 'application/vnd.ms-excel'
+      format.xlsx do
+        render xlsx: 'show', filename: file_name
       end
       format.pdf do
         render pdf: @account.name, template: "accounts/pdf", formats: [:html], orientation: 'Landscape', layout: 'pdf'
